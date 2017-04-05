@@ -35,5 +35,24 @@
         ;
 
 
+
+        vm.changeQuantity = function(item,add){
+  				if(add) {
+  					item.quantity++;
+  				} else {
+  					item.quantity--;
+  				}
+  			}
+
+        vm.update = function update(isValid) {
+          if (isValid) {
+              vm.items.push({"name": vm.item.name, "price": vm.item.price, "quantity": vm.item.quantity, "color": vm.item.color, "discount": vm.item.discount});
+              vm.item ={}
+          }else{
+            alert('Finish the form!')
+          }
+        }
+
+
         });
 })();

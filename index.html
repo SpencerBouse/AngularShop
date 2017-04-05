@@ -23,14 +23,30 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in vm.items">
-						<td>{{item.name}}</td>
+					<tr ng-repeat="item in vm.items | orderBy:'-quantity'">
+						<td class="text">{{item.name}}</td>
 						<td>{{(item.price-item.discount)*vm.tax | currency}}<span ng-if="item.discount > 0"><img src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png"></span></td>
-						<td>{{item.quantity}}</td>
-            <td>{{item.color}}</td>
+            <td>
+              <button ng-click="vm.changeQuantity(item,falsae)">-</button>
+              {{item.quantity}}
+              <button ng-click="vm.changeQuantity(item,true)">+</button>
+            </td>
+            <td class="text">
+              <div class="color" style="background-color:{{item.color}}"></div>
+              {{item.color}}
+            </td>
 					</tr>
 				</tbody>
 			</table>
+      <h2>Input a new Item.</h2>
+      <form class="row newItem" novalidate name='userDetails' ng-submit='vm.update(userDetails.$valid)'>
+        <input type="text" placeholder="Name" ng-model="vm.item.name" required>
+        <input type="text" placeholder="Price" ng-model="vm.item.price" required>
+        <input type="text" placeholder="Quantity" ng-model="vm.item.quantity" required>
+        <input type="text" placeholder="Color" ng-model="vm.item.color" required>
+        <input type="text" placeholder="Discount" ng-model="vm.item.discount" required>
+        <input type="submit">
+      </form>
     </header>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>

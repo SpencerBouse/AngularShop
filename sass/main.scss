@@ -2,3 +2,20 @@
   height: 100px;
   background-color: darken(grey, 5);
 }
+.color {
+  height: 30px;
+  width: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+ }
+.newItem{
+    margin-bottom: 50px;
+}
+.text{
+  text-transform: capitalize;
+}
+input.ng-invalid{
+  background-color: lighten(red,42);
+}
+input.ng-valid{
+  background-color: lighten(green,42);
+}
