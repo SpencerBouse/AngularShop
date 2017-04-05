@@ -34,8 +34,6 @@
         vm.tax=1.0575
         ;
 
-
-
         vm.changeQuantity = function(item,add){
   				if(add) {
   					item.quantity++;

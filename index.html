@@ -41,10 +41,10 @@
       <h2>Input a new Item.</h2>
       <form class="row newItem" novalidate name='userDetails' ng-submit='vm.update(userDetails.$valid)'>
         <input type="text" placeholder="Name" ng-model="vm.item.name" required>
-        <input type="text" placeholder="Price" ng-model="vm.item.price" required>
-        <input type="text" placeholder="Quantity" ng-model="vm.item.quantity" required>
+        <input type="number" placeholder="Price" ng-model="vm.item.price" required>
+        <input type="number" placeholder="Quantity" ng-model="vm.item.quantity" required>
         <input type="text" placeholder="Color" ng-model="vm.item.color" required>
-        <input type="text" placeholder="Discount" ng-model="vm.item.discount" required>
+        <input type="number" placeholder="Discount" ng-model="vm.item.discount" required>
         <input type="submit">
       </form>
     </header>
