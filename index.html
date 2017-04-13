@@ -1,57 +1,70 @@
 <!doctype html>
 <html ng-app='taco'>
-  <head>
-  	<title>Hello World</title>
-  	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="css/main.css">
-  </head>
-  <body ng-controller='HeaderController as vm'>
+
+<head>
+    <title>Hello World</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+
+<body ng-controller='TableController as vm'>
 
     <header class="col-md-8 col-md-offset-2">
-      <div id="angularHeader">
-        <h1 class="col-md-6 col-md-offset-3">Angular Shop</h1>
-        <img class="col-md-2" src="https://scottbcovert.github.io/angularjs-meets-salesforce1/img/AngularJS.png">
-      </div>
-			<table class="table" ng-class="vm.table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Price</th>
-						<th>Quantity</th>
-            <th>Color</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in vm.items | orderBy:'-quantity'">
-						<td class="text">{{item.name}}</td>
-						<td>{{(item.price-item.discount)*vm.tax | currency}}<span ng-if="item.discount > 0"><img src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png"></span></td>
-            <td>
-              <button ng-click="vm.changeQuantity(item,falsae)">-</button>
-              {{item.quantity}}
-              <button ng-click="vm.changeQuantity(item,true)">+</button>
-            </td>
-            <td class="text">
-              <div class="color" style="background-color:{{item.color}}"></div>
-              {{item.color}}
-            </td>
-					</tr>
-				</tbody>
-			</table>
-      <h2>Input a new Item.</h2>
-      <form class="row newItem" novalidate name='userDetails' ng-submit='vm.update(userDetails.$valid)'>
-        <input type="text" placeholder="Name" ng-model="vm.item.name" required>
-        <input type="number" placeholder="Price" ng-model="vm.item.price" required>
-        <input type="number" placeholder="Quantity" ng-model="vm.item.quantity" required>
-        <input type="text" placeholder="Color" ng-model="vm.item.color" required>
-        <input type="number" placeholder="Discount" ng-model="vm.item.discount" required>
-        <input type="submit">
-      </form>
+        <div id="angularHeader">
+            <h1 class="col-md-6 col-md-offset-3">Angular Shop</h1>
+            <img class="col-md-2" src="https://scottbcovert.github.io/angularjs-meets-salesforce1/img/AngularJS.png">
+        </div>
+        <section ng-controller='TableController as vm' class="container col-md-12">
+            <table class="table table-striped table-responsive" ng-class="vm.table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.data track by $index">
+                        <td class="text">{{item.name}}</td>
+                        <td>{{item.price - item.discount * vm.tax | currency}}<span ng-if="item.discount > 0"><img src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png"></span></td>
+                        <td>
+                            <button ng-click="vm.changeQuantity(item,false)" ng-model="vm.update">-</button>
+                            {{item.quantity}}
+                            <button ng-click="vm.changeQuantity(item,true)" ng-model="vm.update">+</button>
+                        </td>
+                        <td class="text">
+                            <div class="color" style="background-color:{{item.color}}"></div>
+                            {{item.color}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Enter An Item</h2>
+            <form class="animated fadeInDown" novalidate name="forms" ng-submit="vm.submitForm(forms.$valid)">
+                <label for="Name">Name *</label>
+                <input class="form-control" ng-model="vm.item.name" type="text" required>
+                <label for="Quantity">Quantity *</label>
+                <input class="form-control" ng-model="vm.item.quantity" type="number" required>
+                <label for="Price">Price *</label>
+                <input class="form-control" ng-model="vm.item.price" type="number" required>
+                <label for="Color">Discount *</label>
+                <input class="form-control" ng-model="vm.item.discount" type="number" required>
+                <label for="Color">Color *</label>
+                <input class="form-control" ng-model="vm.item.color" type="text" required>
+                <button class="btn btn-primary" type="submit">Go</button>
+            </form>
+        </section>
     </header>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <script src='js/main.js'></script>
-  </body>
+    <script src='js/services/API.js'></script>
+    <script src='js/controllers/TableController.js'></script>
+</body>
+
 </html>

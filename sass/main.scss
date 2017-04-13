@@ -1,6 +1,14 @@
+body{
+  font-family: 'Raleway', sans-serif;
+}
 #angularHeader{
   height: 100px;
   background-color: darken(grey, 5);
+  h1{
+    color: white;
+    font-size: 45px;
+    margin-top: 25px;
+    }
 }
 .color {
   height: 30px;
